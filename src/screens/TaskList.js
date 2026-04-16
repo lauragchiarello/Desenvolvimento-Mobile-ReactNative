@@ -4,6 +4,8 @@ import {View, Text, StyleSheet, ImageBackground, TouchableOpacity, Platform, Fla
 import todayImage from '../../assets/img/today.jpg'
 // import Icon from 'react-native-vector-icons/FontAwesome'
 import { FontAwesome } from '@expo/vector-icons';
+import Task from '../components/Task';
+
 
 const taskDB = [
     {
@@ -49,7 +51,7 @@ export default function TaskList() {
                 <FlatList
                     data={taskDB}
                     keyExtractor={item => `${item.id}`}
-                    renderItem={({item}) => <Text>{item.desc}</Text>}
+                    renderItem={({item}) => <Task {...item}/>}
                 />
             </View>
         </View>
@@ -63,8 +65,8 @@ const styles = StyleSheet.create({
     iconBar: {
         flexDirection: 'row',
         marginHorizontal: 20,
-        justifyContent: 'flex-start',
-        marginTop: 40
+        justifyContent: 'flex-end',
+        marginTop: 48
     },
     titleBar: {
         flex: 1,
@@ -83,3 +85,4 @@ const styles = StyleSheet.create({
         marginBottom: 32
     }
 })
+
