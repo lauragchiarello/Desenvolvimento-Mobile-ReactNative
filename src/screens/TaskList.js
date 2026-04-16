@@ -1,0 +1,85 @@
+import {useEffect, useState} from 'react'
+import {View, Text, StyleSheet, ImageBackground, TouchableOpacity, Platform, FlatList } from 'react-native'
+
+import todayImage from '../../assets/img/today.jpg'
+// import Icon from 'react-native-vector-icons/FontAwesome'
+import { FontAwesome } from '@expo/vector-icons';
+
+const taskDB = [
+    {
+        id: Math.random(),
+        desc: 'Ler o livro Fúria Vermelha',
+        estimateAt: new Date(),
+        doneAt: new Date()
+    },
+    {
+        id: Math.random(),
+        desc: 'Caminhar com o cachorro',
+        estimateAt: new Date(),
+        doneAt: new Date()
+    },
+    {
+        id: Math.random(),
+        desc: 'Assistir a série GOT',
+        estimateAt: new Date(),
+        doneAt: new Date()
+    }
+]
+
+export default function TaskList() {
+    return(
+        <View style={styles.container}>
+
+            <ImageBackground source={todayImage} style={styles.background}>
+
+                <View style={styles.iconBar}>
+                    <TouchableOpacity>
+                        {/* <Icon name={'glass'} size={20} color={'blue'}  /> */}
+                        <FontAwesome name="eye" size={20} color="white" />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.titleBar}>
+                    <Text style={styles.title}>Hoje</Text>
+                    <Text style={styles.subtitle}>09 de Abril de 2026</Text>
+                </View>
+
+            </ImageBackground>
+
+            <View style={styles.taskList}>
+                <FlatList
+                    data={taskDB}
+                    keyExtractor={item => `${item.id}`}
+                    renderItem={({item}) => <Text>{item.desc}</Text>}
+                />
+            </View>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {flex: 1},
+    background: {flex:3},
+    taskList: {flex:7},
+    iconBar: {
+        flexDirection: 'row',
+        marginHorizontal: 20,
+        justifyContent: 'flex-start',
+        marginTop: 40
+    },
+    titleBar: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    title: {
+        color: 'white',
+        fontSize: 48,
+        marginLeft: 24,
+        marginBottom: 20
+    },
+    subtitle: {
+        color: 'white',
+        fontSize: 24,
+        marginLeft:24,
+        marginBottom: 32
+    }
+})
